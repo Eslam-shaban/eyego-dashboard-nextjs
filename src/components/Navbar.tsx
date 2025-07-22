@@ -10,11 +10,15 @@ import {
     DropdownMenuItem,
     DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu"
-import { LogOut, Moon, Settings, Sun, User } from 'lucide-react'
+import { Bell, LogOut, Moon, Settings, Sun, User } from 'lucide-react'
 import { Button } from './ui/button'
 import { useTheme } from "next-themes"
+import { useSelector } from 'react-redux'
+import { RootState } from '@/redux/store'
 
 export default function Navbar() {
+    const user = useSelector((state: RootState) => state.auth.user);
+
     const { setTheme } = useTheme();
     return (
         <div className="p-4 flex items-center justify-between sticky top-0 bg-background z-10">
@@ -45,13 +49,16 @@ export default function Navbar() {
                         </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
+                <Button variant="outline" size="icon">
+                    <Bell className="w-5 h-5" />
+                </Button>
 
                 {/* USER MENU  */}
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <Avatar className="cursor-pointer">
                             <AvatarImage src="/mypic.jpg" />
-                            <AvatarFallback>Admin</AvatarFallback>
+                            <AvatarFallback>{user?.email?.split("@")[0]}</AvatarFallback>
                         </Avatar>
                     </DropdownMenuTrigger>
 

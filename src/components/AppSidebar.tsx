@@ -1,3 +1,5 @@
+"use client"
+
 import { Calendar, Home, Inbox, Search, Settings, User } from "lucide-react"
 
 import {
@@ -13,6 +15,7 @@ import {
     SidebarMenuItem,
 } from "@/components/ui/sidebar"
 import Link from "next/link"
+import { usePathname } from "next/navigation";
 // Menu items.
 const items = [
     {
@@ -22,7 +25,7 @@ const items = [
     },
     {
         title: "Users",
-        url: "/dashboard/users",
+        url: "/users",
         icon: User,
     },
     {
@@ -47,6 +50,7 @@ const items = [
     },
 ]
 export function AppSidebar() {
+    const pathname = usePathname();
     return (
         <Sidebar collapsible="icon">
             <SidebarHeader />
@@ -58,7 +62,10 @@ export function AppSidebar() {
                             {items.map((item) => (
                                 <SidebarMenuItem key={item.title}>
                                     <SidebarMenuButton asChild>
-                                        <Link href={item.url}>
+                                        <Link
+                                            href={item.url}
+                                            className={`flex items-center p-2 py-5 gap-2 ${pathname === item.url ? "text-blue-600 bg-secondary font-semibold" : ""
+                                                }`}>
                                             <item.icon />
                                             <span>{item.title}</span>
                                         </Link>
