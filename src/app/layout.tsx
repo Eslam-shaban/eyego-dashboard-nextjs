@@ -25,7 +25,7 @@ export default function RootLayout({
                 <AppSidebar />
                 <main className='w-full'>
                   <Navbar />
-                  <div className='px-4'>
+                  <div className='px-4 bg-secondary min-h-screen'>
                     {children}
                   </div>
                 </main>
