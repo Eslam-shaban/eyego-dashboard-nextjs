@@ -8,6 +8,8 @@ import {
     getCoreRowModel,
     getFilteredRowModel,
     getPaginationRowModel,
+    getSortedRowModel,
+    SortingState,
     useReactTable,
 } from "@tanstack/react-table"
 
@@ -33,6 +35,7 @@ export function DataTable<TData, TValue>({
     data,
 }: DataTableProps<TData, TValue>) {
 
+    const [sorting, setSorting] = React.useState<SortingState>([])
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
         []
     )
@@ -47,9 +50,12 @@ export function DataTable<TData, TValue>({
         // filtering by email (search)
         onColumnFiltersChange: setColumnFilters,
         getFilteredRowModel: getFilteredRowModel(),
+        //sorting by ammount
+        onSortingChange: setSorting,
+        getSortedRowModel: getSortedRowModel(),
 
         state: {
-            //   sorting,
+            sorting,
             columnFilters,
         },
     })
