@@ -20,7 +20,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <div className='flex min-h-screen bg-background text-foreground'>
+            {/* <div className='flex min-h-screen bg-background text-foreground'>
               <SidebarProvider>
                 <AppSidebar />
                 <main className='w-full'>
@@ -30,7 +30,8 @@ export default function RootLayout({
                   </div>
                 </main>
               </SidebarProvider>
-            </div>
+            </div> */}
+            {children}
           </ThemeProvider>
         </ReduxProvider>
       </body>

@@ -47,6 +47,7 @@ export const columns: ColumnDef<User>[] = [
             return (
                 <Button
                     variant={"ghost"}
+                    className="cursor-pointer"
                     onClick={() => column.toggleSorting(isSorted === 'asc')}>
                     Amount
                     <span className="ml-2 h-4 w-4">
