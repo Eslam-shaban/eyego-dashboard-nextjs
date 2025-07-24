@@ -1,9 +1,7 @@
 import { ReduxProvider } from "@/redux/ReduxProvider";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
-import Navbar from "@/components/Navbar";
-import { AppSidebar } from "@/components/AppSidebar";
-import { SidebarProvider } from "@/components/ui/sidebar";
+import { ToastContainer } from "react-toastify";
 
 export default function RootLayout({
   children,
@@ -20,18 +18,8 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            {/* <div className='flex min-h-screen bg-background text-foreground'>
-              <SidebarProvider>
-                <AppSidebar />
-                <main className='w-full'>
-                  <Navbar />
-                  <div className='px-4 bg-secondary min-h-screen'>
-                    {children}
-                  </div>
-                </main>
-              </SidebarProvider>
-            </div> */}
             {children}
+            <ToastContainer />
           </ThemeProvider>
         </ReduxProvider>
       </body>

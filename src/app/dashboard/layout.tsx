@@ -7,12 +7,12 @@ import React from 'react'
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
     return (
-        <div className='flex min-h-screen bg-gray-100'>
+        <div className='flex min-h-screen'>
             <SidebarProvider>
                 <AppSidebar />
                 <main className='w-full'>
                     <Navbar />
-                    <div className=''>
+                    <div className='p-4 '>
                         {children}
                     </div>
                 </main>

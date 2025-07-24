@@ -1,6 +1,6 @@
 "use client"
 
-import { Calendar, Home, Inbox, Search, Settings, User } from "lucide-react"
+import { Calendar, Home, Inbox, LayoutDashboard, Search, Settings, User } from "lucide-react"
 
 import {
     Sidebar,
@@ -20,8 +20,13 @@ import { usePathname } from "next/navigation";
 const items = [
     {
         title: "Home",
-        url: "/dashboard",
+        url: "/",
         icon: Home,
+    },
+    {
+        title: "Dashboard",
+        url: "/dashboard",
+        icon: LayoutDashboard,
     },
     {
         title: "Users",
