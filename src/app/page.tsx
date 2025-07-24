@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { supabase } from '@/lib/supabaseClient'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { cn } from '@/lib/utils' // If you're using Tailwind utils (optional)
+import { cn } from '@/lib/utils'
 // import { UserProfile } from "@/types/UserProfile"
 
 export default function Home() {
@@ -73,20 +73,3 @@ export default function Home() {
     </main>
   )
 }
-
-
-// <main className="min-h-screen flex flex-col items-center justify-center gap-2 bg-background">
-//   <h1 className="text-4xl font-bold mb-4">Welcome to Eyego Dashboard</h1>
-//   <p className="mb-6">Please login to continue</p>
-//   <Link href="/login">
-//     <button className="bg-blue-600 text-foreground px-4 py-2 rounded hover:bg-blue-700">
-//       Go to Login
-//     </button>
-//   </Link>
-//   <Link href="/dashboard">
-//     <button className="bg-blue-600 text-foreground px-4 py-2 rounded hover:bg-blue-700">
-//       Go to Dashboard
-//     </button>
-//   </Link>
-// </main>
-
