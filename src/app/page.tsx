@@ -5,8 +5,10 @@ import { supabase } from '@/lib/supabaseClient'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils' // If you're using Tailwind utils (optional)
+// import { UserProfile } from "@/types/UserProfile"
 
 export default function Home() {
+  // const [userData, setUserData] = useState<UserProfile | null>(null)
   const [userData, setUserData] = useState<any>(null)
 
   useEffect(() => {

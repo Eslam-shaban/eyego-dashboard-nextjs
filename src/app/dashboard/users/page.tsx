@@ -1,3 +1,4 @@
+import AdminGuard from "@/components/AdminGuard"
 import { columns, User } from "./columns"
 import { DataTable } from "./data-table"
 
@@ -38,9 +39,12 @@ export default async function UsersPage() {
 
     const data = await getData()
     return (
-        <div className="container mx-auto py-10 ">
-            <DataTable columns={columns} data={data} />
-        </div>
+        <AdminGuard>
+
+            <div className="container mx-auto py-10 ">
+                <DataTable columns={columns} data={data} />
+            </div>
+        </AdminGuard>
     )
 }
 
