@@ -1,36 +1,146 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Eyego Dashboard (Next.js)
 
-## Getting Started
+Eyego Dashboard is a simple and powerful admin dashboard built with **Next.js**, **Supabase**, and **Tailwind CSS**. It supports authentication, role-based access control (RBAC), data tables, and charts.
 
-First, run the development server:
+---
+
+## 🚀 Features
+
+* 🔐 **Authentication** with Supabase
+* 🛡️ **Admin-only access** to `/dashboard/users`
+* 📊 Responsive charts using **Recharts**
+* 📋 Table with sorting, filtering, and pagination using **TanStack Table**
+* 🎨 Dark/light theme toggle with `next-themes`
+* 🔔 Toast notifications with `react-toastify`
+
+---
+
+## 📁 Project Structure
+
+```
+/app              → Next.js app directory (pages, layout)
+/components       → Reusable UI components (charts, layouts, guards)
+/lib              → Supabase client, utils
+/redux            → Redux setup and slices
+/types            → TypeScript interfaces and types
+/public           → Static assets like logo
+```
+
+---
+
+## 🛠️ Tech Stack
+
+* **Next.js App Router**
+* **Supabase** for auth + Postgres DB
+* **Redux Toolkit** for state management
+* **Tailwind CSS** & **ShadCN UI**
+* **TanStack Table v8**
+* **Recharts**
+* **React Toastify**
+
+---
+
+## 🔒 Authentication & Middleware
+
+* Uses Supabase `auth.getUser()` to get current session
+* `middleware.ts` redirects users to `/login` if not authenticated
+* `ProtectedLayout` wraps all routes except login/signup
+* `AdminGuard` protects `/dashboard/users` — only `role: 'Admin'` can access
+
+---
+
+## 📊 Dashboard Pages
+
+### `/dashboard`
+
+* Shows overview using:
+
+  * Bar chart
+  * Line chart
+  * Area chart
+  * Pie chart
+
+### `/dashboard/users`
+
+* Displays table of users from Supabase
+* Admins only can view
+* Supports:
+
+  * Pagination
+  * Column sorting
+  * Search filter
+  * Custom formatting (e.g. money, role badges)
+
+---
+
+## ⚙️ Getting Started
+
+1. Clone the repo
+
+```bash
+git clone https://github.com/Eslam-shaban/eyego-dashboard-nextjs.git
+cd eyego-dashboard-nextjs
+```
+
+2. Install dependencies
+
+```bash
+npm install
+```
+
+3. Set up environment
+   Create a `.env.local` file:
+
+```
+NEXT_PUBLIC_SUPABASE_URL=your-url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-key
+```
+
+4. Run the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🧪 Supabase Setup
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+* Add a `users` table in Supabase
+* Fields: `id`, `email`, `role`, etc.
+* RLS policy example:
 
-## Learn More
+```sql
+ALTER POLICY "user_can_access_his_own_data"
+ON "public"."users"
+TO public
+USING (
+  auth.uid() = id
+);
+```
 
-To learn more about Next.js, take a look at the following resources:
+* Update admin manually:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```sql
+UPDATE public.users
+SET role = 'Admin'
+WHERE email = 'your@email.com';
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 📸 Screenshots
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+*Add screenshots if needed*
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 📬 Contact
+
+Made with ❤️ by Eslam Shaban. Feel free to contribute or give feedback!
+
+---
+
+## 🪪 License
+
+MIT License
