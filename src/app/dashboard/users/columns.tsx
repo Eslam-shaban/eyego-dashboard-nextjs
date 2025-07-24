@@ -9,7 +9,7 @@ import { ArrowDown, ArrowUp, ArrowUpDown } from "lucide-react";
 // You can use a Zod schema here if you want.
 export type User = {
     id: number
-    name: string
+    full_name: string
     email: string
     role: string
     amount: number
@@ -21,7 +21,7 @@ export const columns: ColumnDef<User>[] = [
         header: "ID",
     },
     {
-        accessorKey: "name",
+        accessorKey: "full_name",
         header: "Name",
     },
     {

@@ -1,40 +1,63 @@
 import AdminGuard from "@/components/AdminGuard"
 import { columns, User } from "./columns"
 import { DataTable } from "./data-table"
+import { supabase } from "@/lib/supabaseClient"
+
+// async function getData(): Promise<User[]> {
+//     // Fetch data from your API here.
+//     return [
+//         { id: 1, name: "Eslam Shaban", email: "eslam@example.com", role: "Admin", amount: 2000 },
+//         { id: 2, name: "Ahmed Ali", email: "ahmed@example.com", role: "User", amount: 1500 },
+//         { id: 3, name: "Sara Gamal", email: "sara@example.com", role: "Editor", amount: 6600 },
+//         { id: 4, name: "Youssef Adel", email: "youssef@example.com", role: "User", amount: 3500 },
+//         { id: 5, name: "Mona Hassan", email: "mona@example.com", role: "User", amount: 10000 },
+//         { id: 6, name: "Omar Nabil", email: "omar@example.com", role: "Admin", amount: 4000 },
+//         { id: 7, name: "Layla Tarek", email: "layla@example.com", role: "User", amount: 87876 },
+//         { id: 8, name: "Khaled Said", email: "khaled@example.com", role: "User", amount: 2527 },
+//         { id: 9, name: "Dina Ashraf", email: "dina@example.com", role: "Editor", amount: 5000 },
+//         { id: 10, name: "Mostafa Samir", email: "mostafa@example.com", role: "User", amount: 8000 },
+//         { id: 11, name: "Farah Hany", email: "farah@example.com", role: "User", amount: 1000 },
+//         { id: 12, name: "Ramy Magdy", email: "ramy@example.com", role: "User", amount: 4000 },
+//         { id: 13, name: "Hana Gamal", email: "hana@example.com", role: "Editor", amount: 9000 },
+//         { id: 14, name: "Tamer Fathy", email: "tamer@example.com", role: "User", amount: 5600 },
+//         { id: 15, name: "Nour Yasser", email: "nour@example.com", role: "Admin", amount: 7000 },
+//         { id: 16, name: "Ziad Khalil", email: "ziad@example.com", role: "User", amount: 9554 },
+//         { id: 17, name: "Mai Hassan", email: "mai@example.com", role: "Editor", amount: 6485 },
+//         { id: 18, name: "Ali Hossam", email: "ali@example.com", role: "User", amount: 7443 },
+//         { id: 19, name: "Reem Ayman", email: "reem@example.com", role: "User", amount: 75758 },
+//         { id: 20, name: "Bassel Adel", email: "bassel@example.com", role: "User", amount: 36996 },
+//         { id: 21, name: "Yara Fadel", email: "yara@example.com", role: "User", amount: 8514 },
+//         { id: 22, name: "Karim Maher", email: "karim@example.com", role: "Admin", amount: 3258 },
+//         { id: 23, name: "Salma Reda", email: "salma@example.com", role: "Editor", amount: 85239 },
+//         { id: 24, name: "Mohamed Ehab", email: "mohamed@example.com", role: "User", amount: 9965 },
+//         { id: 25, name: "Aya Khaled", email: "aya@example.com", role: "User", amount: 1234 },
+//     ]
+// }
 
 async function getData(): Promise<User[]> {
-    // Fetch data from your API here.
-    return [
-        { id: 1, name: "Eslam Shaban", email: "eslam@example.com", role: "Admin", amount: 2000 },
-        { id: 2, name: "Ahmed Ali", email: "ahmed@example.com", role: "User", amount: 1500 },
-        { id: 3, name: "Sara Gamal", email: "sara@example.com", role: "Editor", amount: 6600 },
-        { id: 4, name: "Youssef Adel", email: "youssef@example.com", role: "User", amount: 3500 },
-        { id: 5, name: "Mona Hassan", email: "mona@example.com", role: "User", amount: 10000 },
-        { id: 6, name: "Omar Nabil", email: "omar@example.com", role: "Admin", amount: 4000 },
-        { id: 7, name: "Layla Tarek", email: "layla@example.com", role: "User", amount: 87876 },
-        { id: 8, name: "Khaled Said", email: "khaled@example.com", role: "User", amount: 2527 },
-        { id: 9, name: "Dina Ashraf", email: "dina@example.com", role: "Editor", amount: 5000 },
-        { id: 10, name: "Mostafa Samir", email: "mostafa@example.com", role: "User", amount: 8000 },
-        { id: 11, name: "Farah Hany", email: "farah@example.com", role: "User", amount: 1000 },
-        { id: 12, name: "Ramy Magdy", email: "ramy@example.com", role: "User", amount: 4000 },
-        { id: 13, name: "Hana Gamal", email: "hana@example.com", role: "Editor", amount: 9000 },
-        { id: 14, name: "Tamer Fathy", email: "tamer@example.com", role: "User", amount: 5600 },
-        { id: 15, name: "Nour Yasser", email: "nour@example.com", role: "Admin", amount: 7000 },
-        { id: 16, name: "Ziad Khalil", email: "ziad@example.com", role: "User", amount: 9554 },
-        { id: 17, name: "Mai Hassan", email: "mai@example.com", role: "Editor", amount: 6485 },
-        { id: 18, name: "Ali Hossam", email: "ali@example.com", role: "User", amount: 7443 },
-        { id: 19, name: "Reem Ayman", email: "reem@example.com", role: "User", amount: 75758 },
-        { id: 20, name: "Bassel Adel", email: "bassel@example.com", role: "User", amount: 36996 },
-        { id: 21, name: "Yara Fadel", email: "yara@example.com", role: "User", amount: 8514 },
-        { id: 22, name: "Karim Maher", email: "karim@example.com", role: "Admin", amount: 3258 },
-        { id: 23, name: "Salma Reda", email: "salma@example.com", role: "Editor", amount: 85239 },
-        { id: 24, name: "Mohamed Ehab", email: "mohamed@example.com", role: "User", amount: 9965 },
-        { id: 25, name: "Aya Khaled", email: "aya@example.com", role: "User", amount: 1234 },
-    ]
 
+    // pagination 
+    // const page = 2
+    // const pageSize = 10
+    // const from = (page - 1) * pageSize
+    // const to = from + pageSize - 1
 
+    // const { data, error } = await supabase
+    //     .from("users")
+    //     .select("*", { count: "exact" })
+    //     .range(from, to)
+
+    //return all data at time
+    const { data, error } = await supabase
+        .from("users") // make sure your table is actually named 'users'
+        .select()
+
+    if (error) {
+        console.error("Error fetching users:", error.message)
+        return []
+    }
+    return data as User[]
 }
-
 export default async function UsersPage() {
 
     const data = await getData()
