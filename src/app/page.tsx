@@ -4,12 +4,11 @@ import { useEffect, useState } from 'react'
 import { supabase } from '@/lib/supabaseClient'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { cn } from '@/lib/utils'
-// import { UserProfile } from "@/types/UserProfile"
+import { UserProfile } from "@/types/UserProfile"
 
 export default function Home() {
-  // const [userData, setUserData] = useState<UserProfile | null>(null)
-  const [userData, setUserData] = useState<any>(null)
+  const [userData, setUserData] = useState<UserProfile | null>(null)
+  // const [userData, setUserData] = useState<any>(null)
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -23,7 +22,6 @@ export default function Home() {
           .select('full_name, email, role, amount')
           .eq('id', user.id)
           .single()
-
         if (data) setUserData(data)
       }
     }
